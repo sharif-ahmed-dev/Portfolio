@@ -92,13 +92,32 @@
         margin-bottom: 1rem;
       }
 
+      .linkedin-badge-wrap,
       .profile-photo {
         width: 110px;
         height: 110px;
-        object-fit: cover;
         border-radius: 50%;
         border: 3px solid rgba(76, 201, 240, 0.3);
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        background: var(--surface);
+      }
+
+      .linkedin-badge-wrap {
+        display: grid;
+        place-items: center;
+        position: relative;
+      }
+
+      .linkedin-badge-wrap .LI-profile-badge,
+      .linkedin-badge-wrap .profile-photo {
+        width: 100%;
+        height: 100%;
+      }
+
+      .linkedin-badge-wrap .profile-photo {
+        object-fit: cover;
+        display: none;
       }
 
       h1 {
@@ -244,7 +263,17 @@
         <div class="container hero-grid">
           <div>
             <div class="profile-wrap">
-              <img class="profile-photo" src="https://media.licdn.com/dms/image/v2/D5603AQGBM_a2t2itRA/profile-displayphoto-crop_800_800/B56Z8SEULNH4AI-/0/1782714550817?e=1784764800&v=beta&t=hV_2WlT6x2rhKQaiOGTcCcH2jlOoVL7BrTKw9ZPu_ZY" alt="Sharif Ahmed" />
+              <div class="linkedin-badge-wrap">
+                <div id="linkedinPhotoBadge" class="LI-profile-badge"
+                     data-version="v1"
+                     data-size="medium"
+                     data-locale="en_US"
+                     data-type="horizontal"
+                     data-theme="light"
+                     data-vanity="sharif-dev">
+                </div>
+                <img id="linkedinBadgeFallback" class="profile-photo" src="https://media.licdn.com/dms/image/v2/D5603AQGBM_a2t2itRA/profile-displayphoto-crop_800_800/B56Z8SEULNH4AI-/0/1782714550817?e=1784764800&v=beta&t=hV_2WlT6x2rhKQaiOGTcCcH2jlOoVL7BrTKw9ZPu_ZY" alt="Sharif Ahmed LinkedIn photo" />
+              </div>
             </div>
             <span class="eyebrow">CS Student • Competitive Programmer • Flutter & Dart Developer</span>
             <h1>Building practical solutions with code, logic, and creativity.</h1>
@@ -426,6 +455,42 @@
       }
 
       loadGitHubData();
+
+      function initLinkedInBadge() {
+        if (window.IN && typeof window.IN.parse === "function") {
+          window.IN.parse();
+          return true;
+        }
+        return false;
+      }
+
+      function showLinkedInFallback() {
+        const badge = document.getElementById("linkedinPhotoBadge");
+        const fallback = document.getElementById("linkedinBadgeFallback");
+        if (badge && fallback) {
+          badge.style.display = "none";
+          fallback.style.display = "block";
+        }
+      }
+
+      window.addEventListener("load", () => {
+        if (!initLinkedInBadge()) {
+          setTimeout(() => {
+            if (!initLinkedInBadge()) {
+              showLinkedInFallback();
+            }
+          }, 1500);
+        }
+
+        setTimeout(() => {
+          const badge = document.getElementById("linkedinPhotoBadge");
+          if (badge && badge.childElementCount === 0) {
+            showLinkedInFallback();
+          }
+        }, 3500);
+      });
     </script>
+    <!-- Load LinkedIn badge script -->
+    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer onload="initLinkedInBadge()"></script>
   </body>
 </html>
