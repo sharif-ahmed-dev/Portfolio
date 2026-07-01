@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sharif Ahmed's portfolio website showcasing projects, skills, and contact information."
+    />
+    <title>Sharif Ahmed | Portfolio</title>
+    <style>
+      :root {
+        --bg: #07111f;
+        --surface: #0f1b2d;
+        --text: #f4f7fb;
+        --muted: #8fa3bc;
+        --accent: #4cc9f0;
+        --accent-2: #7b61ff;
+        --border: rgba(255,255,255,0.1);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, var(--bg), #14233d);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; display: block; }
+
+      .container {
+        width: min(1120px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(7, 17, 31, 0.82);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 0;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        font-size: 1.05rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+        color: var(--muted);
+      }
+
+      .nav-links a:hover { color: var(--text); }
+
+      .hero {
+        padding: 5rem 0 4rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 0.4rem 0.8rem;
+        border: 1px solid rgba(76, 201, 240, 0.3);
+        border-radius: 999px;
+        color: var(--accent);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+
+      .profile-wrap {
+        margin-bottom: 1rem;
+      }
+
+      .profile-photo {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid rgba(76, 201, 240, 0.3);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.1;
+        margin: 0 0 1rem;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 650px;
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 0.8rem 1.1rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .btn:hover { transform: translateY(-2px); }
+      .btn-primary {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: white;
+      }
+      .btn-secondary {
+        border: 1px solid var(--border);
+        background: rgba(255,255,255,0.04);
+      }
+
+      .hero-card {
+        background: linear-gradient(160deg, rgba(76,201,240,0.16), rgba(123,97,255,0.12));
+        border: 1px solid var(--border);
+        border-radius: 1.25rem;
+        padding: 1.5rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      }
+
+      .hero-card h2 { margin-top: 0; }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .stat {
+        background: rgba(255,255,255,0.06);
+        border-radius: 0.9rem;
+        padding: 0.8rem;
+        text-align: center;
+      }
+
+      .stat strong { display: block; font-size: 1.1rem; }
+
+      section {
+        padding: 3rem 0;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 1.2rem;
+      }
+
+      .card h3 { margin-top: 0; }
+      .muted { color: var(--muted); }
+
+      .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        padding: 0;
+        list-style: none;
+      }
+
+      .tag-list li {
+        padding: 0.45rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.06);
+        color: var(--text);
+        font-size: 0.94rem;
+      }
+
+      .contact-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      footer {
+        padding: 2rem 0 3rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 780px) {
+        .hero-grid, .card-grid { grid-template-columns: 1fr; }
+        .stats { grid-template-columns: 1fr; }
+        .nav-links { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <a class="brand" href="#home">Sharif Ahmed</a>
+          <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <div class="profile-wrap">
+              <img class="profile-photo" src="https://media.licdn.com/dms/image/v2/D5603AQGBM_a2t2itRA/profile-displayphoto-crop_800_800/B56Z8SEULNH4AI-/0/1782714550817?e=1784764800&v=beta&t=hV_2WlT6x2rhKQaiOGTcCcH2jlOoVL7BrTKw9ZPu_ZY" alt="Sharif Ahmed" />
+            </div>
+            <span class="eyebrow">CS Student • Competitive Programmer • Flutter & Dart Developer</span>
+            <h1>Building practical solutions with code, logic, and creativity.</h1>
+            <p class="lead">
+              I’m Sharif Ahmed, a Computer Science & Engineering student from Bangladesh who enjoys coding, competitive programming, and crafting mobile and web experiences with modern tools.
+            </p>
+            <div class="buttons">
+              <a class="btn btn-primary" href="#projects">View Projects</a>
+              <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <h2>Quick Snapshot</h2>
+            <p class="muted">
+              Passionate about software development, problem solving, and learning new technologies every day.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <strong id="repo-count">—</strong>
+                <span class="muted">Public Repos</span>
+              </div>
+              <div class="stat">
+                <strong>Flutter / Dart</strong>
+                <span class="muted">Core Focus</span>
+              </div>
+              <div class="stat">
+                <strong>Open to</strong>
+                <span class="muted">Collaboration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="container">
+          <h2 class="section-title">About Me</h2>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Who I Am</h3>
+              <p class="muted">
+                I’m a self-driven student and developer exploring software engineering, algorithmic problem solving, and cross-platform app development. I enjoy turning ideas into clean and useful solutions.
+              </p>
+            </article>
+            <article class="card">
+              <h3>What I Do</h3>
+              <p class="muted">
+                I work on programming assignments, build small apps, improve my coding skills, and contribute to projects that combine logic, design, and real-world impact.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="container">
+          <h2 class="section-title">Featured Projects</h2>
+          <div id="featured-projects" class="card-grid"></div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <h2 class="section-title">Skills</h2>
+          <div class="card-grid">
+            <article class="card">
+              <h3>Core Skills</h3>
+              <ul class="tag-list">
+                <li>Dart</li>
+                <li>Flutter</li>
+                <li>C++</li>
+                <li>HTML/CSS/JS</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Tools & Workflow</h3>
+              <ul class="tag-list">
+                <li>Git & GitHub</li>
+                <li>VS Code</li>
+                <li>Competitive Programming</li>
+                <li>Problem Solving</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="container">
+          <h2 class="section-title">Contact</h2>
+          <div class="card">
+            <p class="muted">
+              I’m open to collaboration, learning opportunities, and conversations about software development.
+            </p>
+            <ul class="contact-list">
+              <li>GitHub: <a href="https://github.com/sharif-ahmed-dev" target="_blank" rel="noreferrer">github.com/sharif-ahmed-dev</a></li>
+              <li>LinkedIn: <a href="https://www.linkedin.com/in/sharif-dev" target="_blank" rel="noreferrer">linkedin.com/in/sharif-dev</a></li>
+              <li>Email: <a href="mailto:mail.sharif.dev@gmail.com">mail.sharif.dev@gmail.com</a></li>
+              <li>Location: Bangladesh</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>© <span id="year"></span> Sharif Ahmed. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const username = "sharif-ahmed-dev";
+      const repoCountEl = document.getElementById("repo-count");
+      const featuredProjectsEl = document.getElementById("featured-projects");
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      async function loadGitHubData() {
+        try {
+          const profileRes = await fetch(`https://api.github.com/users/${username}`, {
+            headers: { Accept: "application/vnd.github+json" }
+          });
+          if (!profileRes.ok) throw new Error("Profile request failed");
+          const profile = await profileRes.json();
+
+          if (repoCountEl) {
+            repoCountEl.textContent = profile.public_repos ?? "—";
+          }
+
+          const reposRes = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`, {
+            headers: { Accept: "application/vnd.github+json" }
+          });
+          if (!reposRes.ok) throw new Error("Repos request failed");
+          const repos = await reposRes.json();
+
+          const featuredRepos = repos
+            .filter((repo) => {
+              const name = (repo.name || "").toLowerCase();
+              return !repo.fork && !repo.private && !["portfolio", "sharif-ahmed-dev", "sharif-ahmed-dev.github.io"].includes(name);
+            })
+            .sort((a, b) => {
+              const starsDiff = (b.stargazers_count || 0) - (a.stargazers_count || 0);
+              if (starsDiff !== 0) return starsDiff;
+              const forksDiff = (b.forks_count || 0) - (a.forks_count || 0);
+              if (forksDiff !== 0) return forksDiff;
+              return new Date(b.updated_at) - new Date(a.updated_at);
+            })
+            .slice(0, 4);
+
+          if (featuredProjectsEl) {
+            if (featuredRepos.length === 0) {
+              featuredProjectsEl.innerHTML = '<article class="card"><h3>No featured projects yet</h3><p class="muted">New repositories will appear here automatically.</p></article>';
+              return;
+            }
+
+            featuredProjectsEl.innerHTML = featuredRepos
+              .map(
+                (repo) => `
+                  <article class="card">
+                    <h3><a href="${repo.html_url}" target="_blank" rel="noreferrer">${repo.name}</a></h3>
+                    <p class="muted">${repo.description || "No description provided."}</p>
+                    <ul class="tag-list">
+                      <li>${repo.language || "Other"}</li>
+                      <li>${repo.stargazers_count}★</li>
+                      <li>${repo.forks_count} forks</li>
+                    </ul>
+                  </article>
+                `
+              )
+              .join("");
+          }
+        } catch (error) {
+          if (repoCountEl) repoCountEl.textContent = "—";
+          if (featuredProjectsEl) {
+            featuredProjectsEl.innerHTML = '<article class="card"><h3>Unable to load projects</h3><p class="muted">GitHub data is temporarily unavailable.</p></article>';
+          }
+        }
+      }
+
+      loadGitHubData();
+    </script>
+  </body>
+</html>
